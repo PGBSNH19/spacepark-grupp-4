@@ -432,4 +432,5 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-/Source/**appsettings.json
+/source/SpacePark.API/appsettings.json
+/source/SpacePark.FrontEnd/appsettings.json
