@@ -1,15 +1,15 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SpacePark.API.Models;
-using System.IO;
 
 
 namespace SpacePark.source.Context
 {
     public class SpaceParkContext : DbContext
     {
-        public DbSet<SpacePort> SpacePorts { get; set; }
+        public DbSet<Spaceport> SpacePorts { get; set; }
 
-        public DbSet<ParkingLot> ParkingLots { get; set; }
+        public DbSet<Parkinglot> ParkingLots { get; set; }
 
         public DbSet<Visitor> Visitors { get; set; }
 
