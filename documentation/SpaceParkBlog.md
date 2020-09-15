@@ -20,7 +20,7 @@ This folder keeps all the documentation relevant to our project such as (cheatsh
 
 We decided that the README.md is just a description of the project.
 
-It was pretty easy deciding on the folder structure to use and to create a sln file to connect the webapp with the webapi. 
+It was pretty easy deciding on the folder structure to use and to create a sln file to connect the webapp with the webapi.
 
 We also created a AzureDevOps Pipeline with a standard yaml file with the follwoing content:
 
@@ -50,4 +50,33 @@ steps:
 
 
 
-We decided that we would do stand-ups those days we decide to work. Also decided to use the Board feature in AzureDevOps to coordinate tasks. 
+We decided that we would do stand-ups those days we decide to work. Also decided to use the Board feature in AzureDevOps to coordinate tasks.
+
+
+
+## Dag 2
+
+Att göra idag
+
+1. Bestämma vilken kod vi ska använda för projektet och bena ut
+   * Vi använder ganmla grupp 2 kod som referens
+
+
+
+2. Kolla upp vilken databas och azure grejer vi behöver
+   * Azure Sql Database Serverless (billigt) standard minimi inställningar
+   * Återanväda våra resource groups som vi skapat under kursens gång, likaså containerregistries
+
+
+
+3. Skapa tasks i AzureDevOps och assigna de till gruppens medlemmar för att vi kan börja koda backend lokalt
+
+
+
+Vi pratade om vår inititala lösning med en sln fil och kom på att det kanske blir svårt att separera backend i en docker contianer och frontend delearna. Vi kommer nog välja att ha separata sln filer för de olika projekten. (Detta kollar vi närmare på när vi vet hur vi får upp en webapp i Azure)
+
+
+
+## Initiala tasks och issues på vår AzureDevOps Board
+
+![Board](documentation/img/Initial_Board.png)
