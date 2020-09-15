@@ -13,7 +13,7 @@ namespace SpacePark.source.Context
 
         public DbSet<Visitor> Visitors { get; set; }
 
-        public DbSet<Visitorparking> VisitorParkings { get; set; }
+        public DbSet<VisitorParking> VisitorParkings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

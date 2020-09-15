@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpacePark.API.Models
 {
-    public class Visitorparking
+    public class VisitorParking
     {
+        [Key]
         public int VistorParkingID { get; set; }
         public int ParkingLotID { get; set; }
         public Parkinglot Parkinglot { get; set; }
