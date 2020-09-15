@@ -79,4 +79,4 @@ Vi pratade om vår inititala lösning med en sln fil och kom på att det kanske 
 
 ## Initiala tasks och issues på vår AzureDevOps Board
 
-![Board](documentation\img\Initial_Board.PNG)
+![Board](documentation/img/Initial_Board.PNG)
