@@ -79,3 +79,7 @@ Vi pratade om vår inititala lösning med en sln fil och kom på att det kanske 
 
 ## Initiala tasks och issues på vår AzureDevOps Board
 ![initialBoard](img/initialboard.jpg)
+
+
+Vi har satt upp en Databas i Azure och kört migrations av vår kod till den med framgång.
+Nu har vi basen till backen delen av projektet.
