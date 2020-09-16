@@ -8,7 +8,7 @@ using SpacePark.API.Services;
 namespace SpacePark.API.Controllers
 {
     [ApiKeyAuth]
-    [Route(API/v1.0/"[controller]"")]
+    [Route(API/v1.0/"[controller]")]
     [ApiController]
     public class ParkinglotController : ControllerBase
     { 
@@ -32,10 +32,10 @@ namespace SpacePark.API.Controllers
                 return Ok(result);
 
             }
-            catch (Exception exeption)
+            catch (Exception exception)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exeption.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
             }
         }
     }

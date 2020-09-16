@@ -8,31 +8,32 @@ namespace SpacePark.API.Controllers
     [ApiKeyAuth]
     [Route(API/v1.0/"[controller]")]
     [ApiController]
-    public class ReceiptController :ControllerBase
+    public class SpaceportController : ControllerBase
     {
-        private readonly IReceiptController _receiptRepository;
+        private readonly ISpaceportRepository _spaceportRepository;
 
-        public ReceiptController(IReceiptRepository receiptRepository)
+        public SpaceportController(ISpaceportRepository spaceportRepository)
         {
-            _receiptRepository = receiptRepository;
+            _spaceportRepository = spaceportRepository;
         }
 
-        [HttpGet(Name = "GetReceipts")]
-        public async Task<ActionResult<ReceiptServices[]>> GetReceipts()
+        [HttpGet(Name = "GetSpaceports")]
+        public async Task<ActionResult<SpacportServices[]>> GetSpaceports()
         {
             try
             {
-                var result = await _receiptRepository.GetReceipts();
+                var result = await _spaceportRepository.GetSpaceports();
 
-                if(result.IsNullOrEmpty())
+                if(result.IsNullOrEmpty()) 
                     return NotFound();
-                
+
                 return Ok(result);
             }
             catch (Exception exception)
             {
                 
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
+
             }
         }
     }
