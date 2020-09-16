@@ -3,28 +3,29 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Http;
 using SpacePark.API.Models;
+using SpacePark.API.Services;
+
 namespace SpacePark.API.Controllers
 {
-    [ApiKeyAuth]
-    [Route(API/v1.0/"[controller]"")]
+    [Route("API/v1.0/[controller]")]
     [ApiController]
 
     public class VisitorController : ControllerBase
     {
-        private readonly IVisitorController _visitorController;
+        private readonly IVisitorRepository _visitorRepository;
 
-        public VisitorController(IVisitorController visitorController)
+        public VisitorController(IVisitorRepository visitorRepository)
         {
-            _visitorController = visitorController;
+            _visitorRepository = visitorRepository;
         }
         [HttpGet(Name = "GetVisitors")]
-        public async Task<ActionResult<VisitorController[]>> GetVisitors()
+        public async Task<ActionResult<Visitor>> GetVisitors()
         {
             try
             {
-                var result = await _visitorController.GetVisitors();
+                var result = await _visitorRepository.GetVisitors();
 
-                if(result.IsNullOrEmpty()) 
+                if(result == null) 
                     return NotFound();
 
                 return Ok(result);
@@ -38,10 +39,12 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpPost(Name ="PostVisitor")]
-        public async Task<ActionResult<VisitorController[]>> PostVisitor(Visitor visitor)
+        public async Task<ActionResult<Visitor>> PostVisitor(Visitor visitor)
         {
-
-            return Ok(await _visitorController)
+           // _visitorRepository.Add(visitor);
+            //if(await _visitorRepository.Save())
+              //  return Created($"api/v1.0/visitor/{_visitorRepository.}")
+            return Ok(await _visitorRepository.AddVisitor(visitor));
         }
     }
 }

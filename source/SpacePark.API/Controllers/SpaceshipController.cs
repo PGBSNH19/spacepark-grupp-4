@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
 {
-    [ApiKeyAuth]
-    [Route(API/v1.0/"[controller]")]
+    [Route("API/v1.0/[controller]")]
     [ApiController]
     public class SpaceshipController : ControllerBase
     {

@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SpacePark.API.Controllers
 {
-    [ApiKeyAuth]
-    [Route(API/v1.0/"[controller]")]
+    [Route("API/v1.0/[controller]")]
     [ApiController]
     public class SpaceportController : ControllerBase
     {
