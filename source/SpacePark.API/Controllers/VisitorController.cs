@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Http;
-
+using SpacePark.API.Models;
 namespace SpacePark.API.Controllers
 {
     [ApiKeyAuth]
@@ -35,6 +35,13 @@ namespace SpacePark.API.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exeption.Message}");
             }
+        }
+
+        [HttpPost(Name ="PostVisitor")]
+        public async Task<ActionResult<VisitorController[]>> PostVisitor(Visitor visitor)
+        {
+
+            return Ok(await _visitorController)
         }
     }
 }
