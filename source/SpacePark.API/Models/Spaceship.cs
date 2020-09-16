@@ -2,7 +2,8 @@
 {
     public class Spaceship
     {
+        public int Name { get; set; }
         public int VisitorID { get; set; }
-        public int SpaceShipID { get; set; }
+        public int ParkingLotID { get; set; }
     }
 }
