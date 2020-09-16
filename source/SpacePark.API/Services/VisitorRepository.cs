@@ -16,5 +16,13 @@ namespace SpacePark.API.Services
 
             return await query.ToArrayAsync();
         }
+
+        public async Task<Visitor> AddVisitor(Visitor newVisitor)
+        {
+            await _context.Visitors.AddAsync(newVisitor);
+            await _context.SaveChangesAsync();
+
+            return newVisitor;
+        }
     }
 }
