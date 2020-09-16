@@ -11,18 +11,18 @@ namespace SpacePark.API.Controllers
 
     public class VisitorController : ControllerBase
     {
-        private readonly IVisitorsController _visitorsController;
+        private readonly IVisitorController _visitorController;
 
-        public VisitorController(IVisitorsController visitorsController)
+        public VisitorController(IVisitorController visitorController)
         {
-            _visitorsController = visitorsController;
+            _visitorController = visitorController;
         }
         [HttpGet(Name = "GetVisitors")]
         public async Task<ActionResult<VisitorController[]>> GetVisitors()
         {
             try
             {
-                var result = await _visitorsController.GetVisitors();
+                var result = await _visitorController.GetVisitors();
 
                 if(result.IsNullOrEmpty()) 
                     return NotFound();
