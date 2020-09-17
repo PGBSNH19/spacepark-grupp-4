@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpacePark.API.Models;
+using SpacePark.API.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
@@ -20,14 +19,15 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpGet(Name = "GetSpaceships")]
-        public async Task<ActionResult<SpaceshipServices[]>> GetSpaceships()
+        public async Task<ActionResult<Spaceship[]>> GetSpaceships()
         {
             try
             {
                 var result = await _spaceshipRepository.GetSpaceships();
 
-                if (result.IsNullOrEmpty())
+                if (result == null)
                     return NotFound();
+
 
                 return Ok(result);
             }
