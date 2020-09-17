@@ -19,21 +19,18 @@ namespace SpacePark.API.Controllers
         }
         
         [HttpGet(Name = "GetParkinglots")]
-        public async Task<ActionResult<ParkinglotServices[]>> GetParkinglots()
+        public async Task<ActionResult<Parkinglot[]>> GetParkinglots()
         {
             try
             {
                 var result = await _parkinglotRepository.GetParkinglots();
 
-                if(result.IsNullOrEmpty()) 
-                    return NotFound();
+                if(result == null) return NotFound();
 
                 return Ok(result);
-
             }
             catch (Exception exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
             }
         }
