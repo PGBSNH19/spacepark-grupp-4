@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SpacePark.API\SpacePark.API.csproj" />
+  </ItemGroup>
+
 </Project>
