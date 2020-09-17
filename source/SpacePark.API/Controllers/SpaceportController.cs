@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpacePark.API.Models;
 
 namespace SpacePark.API.Controllers
 {
@@ -17,14 +18,13 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpGet(Name = "GetSpaceports")]
-        public async Task<ActionResult<SpacportServices[]>> GetSpaceports()
+        public async Task<ActionResult<Spaceport[]>> GetSpaceports()
         {
             try
             {
                 var result = await _spaceportRepository.GetSpaceports();
 
-                if(result.IsNullOrEmpty()) 
-                    return NotFound();
+                if(result == null) return NotFound();
 
                 return Ok(result);
             }
