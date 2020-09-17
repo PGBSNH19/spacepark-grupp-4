@@ -38,12 +38,9 @@ namespace SpacePark.API.Controllers
             }
         }
 
-        [HttpPost(Name ="PostVisitor")]
+        [HttpPost]
         public async Task<ActionResult<Visitor>> PostVisitor(Visitor visitor)
         {
-           // _visitorRepository.Add(visitor);
-            //if(await _visitorRepository.Save())
-              //  return Created($"api/v1.0/visitor/{_visitorRepository.}")
             return Ok(await _visitorRepository.AddVisitor(visitor));
         }
     }
