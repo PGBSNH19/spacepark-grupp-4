@@ -12,9 +12,11 @@ namespace SpacePark.API.Services
         { }
         public async Task<Visitor[]> GetVisitors()
         {
-            IQueryable<Visitor> query = _context.Visitors.OrderBy(visitor => visitor.VisitorID);
+            //IQueryable<Visitor> query = _context.Visitors.OrderBy(visitor => visitor.VisitorID);
 
-            return await query.ToArrayAsync();
+            //return await query.ToArrayAsync();
+            var visitors = await _context.Visitors.ToArrayAsync();
+            return visitors;
         }
 
         public async Task<Visitor> AddVisitor(Visitor newVisitor)
