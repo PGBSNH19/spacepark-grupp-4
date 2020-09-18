@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
+using SpacePark.FrontEnd.Models;
 using SpacePark.source.Context;
 
 namespace SpacePark.FrontEnd
@@ -26,7 +27,9 @@ namespace SpacePark.FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddControllers(); 
+            //services.AddHttpClient<VisitorsOnSite>();
+            services.AddControllers();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +56,7 @@ namespace SpacePark.FrontEnd
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
