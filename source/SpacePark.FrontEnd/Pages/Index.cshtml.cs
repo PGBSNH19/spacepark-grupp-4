@@ -1,21 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SpaceParkFE.Services;
 
-namespace SpacePark.FrontEnd.Pages
+namespace SpaceParkFE.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly VisitorService _visitorService;
+        public List<Person> Visitors { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+
+        public IndexModel(ILogger<IndexModel> logger, VisitorService visitorService)
         {
             _logger = logger;
+            _visitorService = visitorService;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-
+            Visitors = await _visitorService.GetAllTheVisitors();
         }
     }
 }
