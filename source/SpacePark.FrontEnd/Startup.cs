@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SpacePark.API.Models;
-using SpacePark.API.Services;
-using SpacePark.FrontEnd.Models;
-using SpacePark.source.Context;
+using SpacePark.FrontEnd.Services;
+
 
 namespace SpacePark.FrontEnd
 {
@@ -30,6 +23,8 @@ namespace SpacePark.FrontEnd
             //services.AddHttpClient<VisitorsOnSite>();
             services.AddControllers();
             services.AddRazorPages();
+            services.AddHttpClient<VisitorService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
