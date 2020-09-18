@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using RestSharp;
+using SpacePark.FrontEnd.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SpacePark.FrontEnd.Pages
 {
@@ -8,23 +10,21 @@ namespace SpacePark.FrontEnd.Pages
     {
 
         private readonly ILogger<VisitorRequestModel> _logger;
+        private readonly VisitorService _visitorService;
 
-        public string JsonResponseFromAPI { get; set; }
-        public VisitorRequestModel(ILogger<VisitorRequestModel> logger)
+
+        public List<Person> Visitors { get; private set; }
+        public VisitorRequestModel(ILogger<VisitorRequestModel> logger, VisitorService visitorService)
         {
             _logger = logger;
+            _visitorService = visitorService;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
 
-            var client = new RestClient($"https://localhost:5001/API/v1.0/");
-            var request = new RestRequest($"visitor", Method.GET);
-            IRestResponse apiResponse = client.Execute(request);
-            var result = apiResponse.Content;
+            Visitors = await _visitorService.GetAllTheVisitors();
 
-            JsonResponseFromAPI = result;
-            //return new OkResult();
         }
 
     }
