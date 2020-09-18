@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpacePark.API.Models;
 using SpacePark.source.Context;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Services
 {
-    public class VisitorRepository : Repository, IVisitorRepository
+    public class VisitorRepository : IVisitorRepository
     {
-        public VisitorRepository(SpaceParkContext context) : base(context)
-        { }
-        public async Task<Visitor[]> GetVisitors()
+        private readonly SpaceParkContext _context;
+        public VisitorRepository(SpaceParkContext context)
         {
-            //IQueryable<Visitor> query = _context.Visitors.OrderBy(visitor => visitor.VisitorID);
+            _context = context;
 
-            //return await query.ToArrayAsync();
-            var visitors = await _context.Visitors.ToArrayAsync();
+        }
+        public async Task<List<Visitor>> GetVisitors()
+        {
+            var visitors = await _context.Visitors.ToListAsync();
             return visitors;
         }
 
