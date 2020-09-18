@@ -2,10 +2,15 @@
 @model VisitorRequestModel
 
 @{
-    ViewData["Title"] = "Visitor Request";
+    ViewData["Title"] = "Checked in Visitors";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>@Model.JsonResponseFromAPI</p>
+<p></p>
+
+@foreach (var p in Model.Visitors)
+{
+    <h3>@p.Name</h3>
+}
 
 
