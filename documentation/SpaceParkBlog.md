@@ -108,3 +108,18 @@ Vi bestämde oss för följande folderstruktur för att följa någotsånär MVC
 
 
 Vi ska skapa issues på alla de punkter vi kommer på nu för att koda ihop controller, services etc...
+
+## Dag 4
+
+Sebastian, Anders, Murat, Oskar (William kom in senare på dagen)
+
+Vi började dagen med att få till GET och POST metoder för våran "Visitor" controller i API:et och testade så att dessa metoder fungerade. 
+
+Sedan så  bestämde vi oss för att plugga på egen hand om MVC då ingen av oss har jobbat i det tidigare. 
+
+## Dag 5
+
+Idag fick vi till så att vi kan hämta ut en sträng med alla visitors och visa upp det på Frontenden. Allt detta körs lokalt än så länge. 
+
+
+
