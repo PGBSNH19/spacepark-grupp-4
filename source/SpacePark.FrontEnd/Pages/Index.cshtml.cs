@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SpaceParkFE.Services;
 
-namespace SpaceParkFE.Pages
+namespace SpacePark.FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
