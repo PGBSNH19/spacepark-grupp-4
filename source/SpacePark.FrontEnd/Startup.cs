@@ -24,6 +24,8 @@ namespace SpacePark.FrontEnd
             services.AddControllers();
             services.AddRazorPages();
             services.AddHttpClient<VisitorService>();
+            services.AddHttpClient<CheckInVisitorService>();
+            services.AddHttpClient<CheckOutVisitorService>();
 
         }
 

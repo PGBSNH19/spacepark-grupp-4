@@ -6,6 +6,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome To the Spacepark!</h1>
-    <p>Please enter your name to start parking!</p>
-    <input type ="text" name="name" />
+    <p>Press the button to continue...</p>
+    <form method="get">
+        <button type="submit" asp-page="CheckInVisitor">Click me to go to the Check in page</button>
+    </form>
+    <p></p>
+    <form method="get">
+        <button type="submit" asp-page="CheckOutVisitor">Click me to go to the Check out page</button>
+    </form>
+
+
 </div>
