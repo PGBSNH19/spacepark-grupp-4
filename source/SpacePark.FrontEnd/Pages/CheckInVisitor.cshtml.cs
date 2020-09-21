@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SpacePark.FrontEnd.Services;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SpacePark.FrontEnd.Pages
@@ -10,28 +9,25 @@ namespace SpacePark.FrontEnd.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly CheckInVisitorService _checkInVisitorService;
-        public HttpResponseMessage response { get; private set; }
+        public Visitor response { get; private set; }
+
         public CheckInVisitorModel(ILogger<IndexModel> logger, CheckInVisitorService checkInVisitorService)
         {
             _logger = logger;
             _checkInVisitorService = checkInVisitorService;
         }
 
-        public async Task OnPost()
+        public async Task<Visitor> OnPost()
         {
-            string name = Request.Form["name"];
+            string visitorname = Request.Form["visitorname"];
+            string shipname = Request.Form["shipname"];
 
-            //return response = await _checkInVisitorService.PostVisitor(name);
-
+            var response = await _checkInVisitorService.PostVisitor(visitorname, shipname);
+            if (response != null)
+            {
+                return response;
+            }
+            return null;
         }
-
-
-
-
-
-
-
-
-
     }
 }

@@ -3,15 +3,29 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@if (Model.response == null)
+{
+    <div id="divTop" class="divhead">
+        <h1 class=" display-4">Welcome Costumer! </h1>
+        <form method="post">
+            <p>Enter your name here: </p>
+            <input type="text" name="visitorname" />
+            <p>Enter the name of your spaceship: </p>
+            <input type="text" name="shipname" />
+        </form>
+    </div>
+    <p>
+    </p>
+}
+else
+{
+    <h1>Ship Parked!</h1>
+    <p>Thank you for using our service</p>
+    <a href="index">Press here to return to homepage!</a>
+    
 
-<div id="divTop" class="divhead">
-    <h1 class=" display-4">Welcome Costumer, enter your name to Check in: </h1>
-    <form method="post">
-        <input type="text" name="name" />
-    </form>
-</div>
-<p>
-</p>
+
+}
 
 
 
