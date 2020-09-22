@@ -23,8 +23,6 @@ namespace SpacePark.FrontEnd.Services
             var response = await Client.GetAsync($"API/v1.0/SwapiVisitor/Character/{visitorname}");
             using var responseStream = await response.Content.ReadAsStreamAsync();
 
-
-
             if (response.IsSuccessStatusCode)
             {
                 var shipResponse = await Client.GetAsync($"API/v1.0/SwapiShip/Ship/{shipname}");
@@ -71,7 +69,6 @@ namespace SpacePark.FrontEnd.Services
         public int ShipID { get; set; }
 
         [JsonPropertyName("shipname")]
-
         public string ShipName { get; set; }
     }
 
