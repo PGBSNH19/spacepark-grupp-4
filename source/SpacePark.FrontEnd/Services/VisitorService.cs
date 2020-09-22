@@ -33,5 +33,6 @@ namespace SpacePark.FrontEnd.Services
 
         [JsonPropertyName("visitorID")]
         public int VisitorID { get; set; }
+
     }
 }

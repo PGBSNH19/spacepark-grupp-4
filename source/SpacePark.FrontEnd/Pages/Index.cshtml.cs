@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SpacePark.FrontEnd.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SpacePark.FrontEnd.Pages
 {
@@ -23,5 +23,8 @@ namespace SpacePark.FrontEnd.Pages
         {
             Visitors = await _visitorService.GetAllTheVisitors();
         }
+
+
+
     }
 }

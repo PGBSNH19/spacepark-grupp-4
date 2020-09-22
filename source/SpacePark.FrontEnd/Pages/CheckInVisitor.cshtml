@@ -1,0 +1,33 @@
+﻿@page
+@model CheckInVisitorModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@if (Model.visitor == null)
+{
+    <div id="divTop" class="divhead">
+        <h1 class=" display-4">Welcome Costumer! </h1>
+        <form method="post">
+            <p>Enter your name here: </p>
+            <input type="text" name="visitorname" />
+            <p>Enter the name of your spaceship: </p>
+            <input type="text" name="shipname" />
+            <button type="submit">Click me!</button>
+        </form>
+    </div>
+    <p>
+    </p>
+}
+else
+{
+    <h1>Ship Parked!</h1>
+    <p>Thank you for using our service</p>
+    <a href="index">Press here to return to homepage!</a>
+    
+
+
+}
+
+
+
+
