@@ -22,7 +22,7 @@ namespace SpacePark.FrontEnd.Pages
             string visitorName = Request.Form["visitorname"];
             string shipname = Request.Form["shipname"];
 
-            var response = _checkOutVisitorService.DeleteVisitor(visitorName);
+            var response = await _checkOutVisitorService.DeleteVisitor(visitorName);
             if (response != null)
             {
                 PageCheck = true;

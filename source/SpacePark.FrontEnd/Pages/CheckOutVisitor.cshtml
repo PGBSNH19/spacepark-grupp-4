@@ -6,29 +6,25 @@
 
 @if (Model.PageCheck == false)
 {
-    <div class="text-center">
-        <div id="divTop" class="divhead">
-            <h1 class=" display-4">Welcome Costumer! </h1>
-            <form>
-                <p>Please enter your name:</p>
-                <input type="text" name="visitorname" />
-                <p>Please enter the name of you ship:</p>
-                <input type="text" name="shipname" />
-                <button type="submit">Click me!</button>
-            </form>
-        </div>
-        <p>
-        </p>
-    </div>
+    
+    <h1 class=" display-4">Welcome Costumer! </h1>
+     <form method="post">
+      <p>Please enter your name:</p>
+      <input type="text" name="visitorname" />
+       <p>Please enter the name of you ship:</p>
+       <input type="text" name="shipname" />
+       <button type="submit">Click me!</button>
+      </form>
+        
+       
+    
 }
 else
 {
-<div class="text-center">
-    <div id="divTop" class="divhead">
+
         <h1>Ship Parked!</h1>
         <p>Thank you for using our service</p>
         <a href="index">Press here to return to homepage!</a>
 
-    </div>
-</div>
+  
  }

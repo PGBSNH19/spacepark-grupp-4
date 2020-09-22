@@ -27,9 +27,13 @@ namespace SpacePark.API.Controllers
                 var result = await _visitorRepository.GetVisitors();
 
                 if (result == null)
+                {
                     return NotFound();
-
-                return Ok(result);
+                }
+                else
+                {
+                    return Ok(result);
+                }
 
             }
             catch (Exception exeption)
