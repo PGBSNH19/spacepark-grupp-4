@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SpacePark.API.Services
 {
-    public class VisitorRepository : IVisitorRepository
+    public class VisitorRepository : Repository, IVisitorRepository
     {
-        private readonly SpaceParkContext _context;
-        public VisitorRepository(SpaceParkContext context)
+
+        public VisitorRepository(SpaceParkContext context) : base(context)
         {
-            _context = context;
+
 
         }
         public async Task<List<Visitor>> GetVisitors()
@@ -19,7 +19,6 @@ namespace SpacePark.API.Services
             var visitors = await _context.Visitors.ToListAsync();
             return visitors;
         }
-
         public async Task<Visitor> AddVisitor(Visitor newVisitor)
         {
             await _context.Visitors.AddAsync(newVisitor);
@@ -27,5 +26,7 @@ namespace SpacePark.API.Services
 
             return newVisitor;
         }
+
+
     }
 }

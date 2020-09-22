@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-@if (true == true)
+@if (Model.PageCheck == false)
 {
     <div class="text-center">
         <div id="divTop" class="divhead">
@@ -14,7 +14,6 @@
                 <input type="text" name="visitorname" />
                 <p>Please enter the name of you ship:</p>
                 <input type="text" name="shipname" />
-                <p></p>
                 <button type="submit">Click me!</button>
             </form>
         </div>

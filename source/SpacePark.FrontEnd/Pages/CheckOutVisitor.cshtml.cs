@@ -8,7 +8,7 @@ namespace SpacePark.FrontEnd.Pages
     {
 
         private readonly CheckOutVisitorService _checkOutVisitorService;
-
+        public bool PageCheck = false;
 
 
         public CheckOutVisitorModel(CheckOutVisitorService checkOutVisitorService)
@@ -23,6 +23,14 @@ namespace SpacePark.FrontEnd.Pages
             string shipname = Request.Form["shipname"];
 
             var response = _checkOutVisitorService.DeleteVisitor(visitorName);
+            if (response != null)
+            {
+                PageCheck = true;
+            }
+            else
+            {
+                PageCheck = false;
+            }
         }
     }
 }

@@ -16,9 +16,17 @@ namespace SpacePark.FrontEnd.Services
         }
 
 
-        public async Task<Visitor> DeleteVisitor(string visitorname)
+        public async Task<HttpResponseMessage> DeleteVisitor(string visitorname)
         {
-            return null;
+            var response = await Client.DeleteAsync($"API/v1.0/VisitorController/{visitorname}");
+            if (response.IsSuccessStatusCode)
+            {
+                return response;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
