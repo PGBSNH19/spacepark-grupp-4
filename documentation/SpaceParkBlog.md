@@ -121,5 +121,10 @@ Sedan så  bestämde vi oss för att plugga på egen hand om MVC då ingen av os
 
 Idag fick vi till så att vi kan hämta ut en sträng med alla visitors och visa upp det på Frontenden. Allt detta körs lokalt än så länge. 
 
+## Dag 6
+
+Backend: Vi gjort klart så att vi kan göra ett anrop till Swapi, där vi kollar om namnet på besökaren finns med som karaktär i Starwars eller ej. 
+Frontend: Håller på och kikar på hur vi skall använda oss av ovan anrop och implementera det. 
+
 
 
