@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace SpacePark.FrontEnd.Services
 {
@@ -13,5 +15,19 @@ namespace SpacePark.FrontEnd.Services
             Client = client;
         }
 
+
+        public async Task<Visitor> DeleteVisitor(string visitorname)
+        {
+            return null;
+        }
+    }
+
+    public class VisitorToDelete
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("visitorID")]
+        public int VisitorID { get; set; }
     }
 }

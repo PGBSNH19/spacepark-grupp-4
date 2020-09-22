@@ -1,25 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using SpacePark.FrontEnd.Services;
+using System.Threading.Tasks;
 
 namespace SpacePark.FrontEnd.Pages
 {
     public class CheckOutVisitorModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+
         private readonly CheckOutVisitorService _checkOutVisitorService;
 
 
 
-        public CheckOutVisitorModel(ILogger<IndexModel> logger, CheckOutVisitorService checkOutVisitorService)
+        public CheckOutVisitorModel(CheckOutVisitorService checkOutVisitorService)
         {
-            _logger = logger;
+
             _checkOutVisitorService = checkOutVisitorService;
         }
 
-        //public async Task OnGetAsync()
-        //{
+        public async Task OnPost()
+        {
+            string visitorName = Request.Form["visitorname"];
+            string shipname = Request.Form["shipname"];
 
-        //}
+            var response = _checkOutVisitorService.DeleteVisitor(visitorName);
+        }
     }
 }
