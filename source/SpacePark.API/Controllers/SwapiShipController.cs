@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
+using SpacePark.API.Models;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using SpacePark.API.Models;
 
 namespace SpacePark.API.Controllers
 {
@@ -16,8 +16,8 @@ namespace SpacePark.API.Controllers
         {
             using HttpClient client = new HttpClient();
 
-            var response = client.GetStreamAsync($"https://swapi.dev/api/ship/?search={ shipName }");
-            var result = await JsonSerializer.DeserializeAsync<SwapiShipResult>(await response);
+            var response = await client.GetStreamAsync($"https://swapi.dev/api/starships/?search={ shipName }");
+            var result = await JsonSerializer.DeserializeAsync<SwapiShipResult>(response);
 
             return result;
         }

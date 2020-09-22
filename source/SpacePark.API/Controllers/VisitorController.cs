@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
 {
@@ -25,7 +25,7 @@ namespace SpacePark.API.Controllers
             {
                 var result = await _visitorRepository.GetVisitors();
 
-                if(result == null) 
+                if (result == null)
                     return NotFound();
 
                 return Ok(result);

@@ -1,8 +1,7 @@
-﻿
+﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -17,30 +16,28 @@ namespace SpacePark.FrontEnd.Services
             client.BaseAddress = new Uri("https://localhost:5001/");
             Client = client;
         }
+        public Visitor returnVisitor { get; private set; }
 
         public async Task<Visitor> PostVisitor(string visitorname, string shipname)
         {
             var response = await Client.GetAsync($"API/v1.0/SwapiVisitor/Character/{visitorname}");
-            using var responseStream = await response.Content.ReadAsStreamAsync();
+
 
             if (response.IsSuccessStatusCode)
             {
                 var shipResponse = await Client.GetAsync($"API/v1.0/SwapiShip/Ship/{shipname}");
 
-                using var responseShipStream = await shipResponse.Content.ReadAsStreamAsync();
-                var shipBuilder = await JsonSerializer.DeserializeAsync<Visitor>(responseShipStream);
 
                 if (shipResponse.IsSuccessStatusCode)
                 {
+                    using var responseStream = await response.Content.ReadAsStreamAsync();
+                    var result = await System.Text.Json.JsonSerializer.DeserializeAsync<ArrayHandler>(responseStream);
+                    returnVisitor = result.VisitorResult[2];
 
-                    var returnVisitor = await JsonSerializer.DeserializeAsync<Visitor>(responseStream);
+                    var data = new StringContent(JsonConvert.SerializeObject(returnVisitor), Encoding.UTF8, "application/json");
 
-                    returnVisitor.ShipID = shipBuilder.ShipID;
-                    returnVisitor.ShipName = shipBuilder.ShipName;
+                    var addResponse = await Client.PostAsync($"API/v1.0/Visitor", data);
 
-                    var data = new StringContent(returnVisitor.ToString(), Encoding.UTF8, "application/json");
-
-                    var addResponse = await Client.PostAsync($"API/v1.0/Visitor/{returnVisitor}", data);
                     if (addResponse.IsSuccessStatusCode)
                     {
                         return returnVisitor;
@@ -57,6 +54,16 @@ namespace SpacePark.FrontEnd.Services
         }
 
     }
+    public class ArrayHandler
+    {
+        [JsonPropertyName("results")]
+        public Visitor[] VisitorResult { get; set; }
+    }
+    public enum HasPayed
+    {
+        HasPaid,
+        NotPaid
+    }
     public class Visitor
     {
         [JsonPropertyName("name")]
@@ -65,11 +72,13 @@ namespace SpacePark.FrontEnd.Services
         [JsonPropertyName("visitorID")]
         public int VisitorID { get; set; }
 
-        [JsonPropertyName("shipID")]
-        public int ShipID { get; set; }
+        public HasPayed Payed { get; set; }
 
-        [JsonPropertyName("shipname")]
-        public string ShipName { get; set; }
+        //[JsonPropertyName("shipID")]
+        //public int ShipID { get; set; }
+
+        //[JsonPropertyName("shipname")]
+        //public string ShipName { get; set; }
     }
 
 }

@@ -26,8 +26,19 @@ namespace SpacePark.FrontEnd.Pages
 
             if (response != null)
             {
-                visitor = response.Result;
+                visitor = new Visitor
+                {
+                    Name = response.Result.Name,
+                    //ShipID = response.Result.ShipID,
+                    //ShipName = response.Result.ShipName,
+                    VisitorID = response.Result.VisitorID
+                };
             }
+            else
+            {
+                visitor = null;
+            }
+
 
         }
     }
