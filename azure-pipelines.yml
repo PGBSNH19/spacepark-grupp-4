@@ -10,10 +10,24 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'source/SpacePark.API/SpacePark.API.csproj'
+
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: false
+    arguments: '--configuration $(buildConfiguration) --output out'
+    workingDirectory: 'source/SpacePark.API'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'SpaceParkContainer4'
+    repository: 'spaceparkbackend'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
