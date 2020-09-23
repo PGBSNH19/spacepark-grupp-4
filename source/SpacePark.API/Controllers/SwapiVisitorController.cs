@@ -11,15 +11,15 @@ namespace SpacePark.API.Controllers
     [ApiController]
     public class SwapiVisitorController : ControllerBase
     {
-        [HttpGet("Character/{visitornName}")]
+        [HttpGet("Character/{visitorName}")]
         public async Task<SwapiVisitorResult> GetStarWarsCharacter(string visitorName)
         {
-
             using HttpClient client = new HttpClient();
 
             var response = await client.GetStreamAsync($"https://swapi.dev/api/people/?search={ visitorName }");
             var result = await JsonSerializer.DeserializeAsync<SwapiVisitorResult>(response);
-
+            if(response == null)
+                return null;
             return result;
         }
     }
