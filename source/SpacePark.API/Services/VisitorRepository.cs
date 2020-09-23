@@ -2,6 +2,7 @@
 using SpacePark.API.Models;
 using SpacePark.source.Context;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Services
@@ -13,6 +14,11 @@ namespace SpacePark.API.Services
         {
 
 
+        }
+        public Visitor GetVisitor(string name)
+        {
+            var visitor = _context.Visitors.Where(x => x.Name == name).First();
+            return visitor;
         }
         public async Task<List<Visitor>> GetVisitors()
         {

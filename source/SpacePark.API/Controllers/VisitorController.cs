@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
@@ -49,13 +48,13 @@ namespace SpacePark.API.Controllers
             return Ok(await _visitorRepository.AddVisitor(visitor));
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<Visitor>> DeleteVisitor(string visitorname)
+        [HttpDelete("{name}")]
+        public async Task<ActionResult<Visitor>> DeleteVisitor(string name)
         {
-            var allVisitors = await _visitorRepository.GetVisitors();
-            var visitorToRemove = allVisitors.Where(x => x.Name == visitorname);
 
-            if (visitorname == null)
+            var visitorToRemove = _visitorRepository.GetVisitor(name);
+
+            if (visitorToRemove == null)
             {
                 return NotFound();
             }
