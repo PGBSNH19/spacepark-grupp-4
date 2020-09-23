@@ -12,9 +12,7 @@ namespace SpacePark.API.Models
     public class Spaceport
     {
         public int SpacePortID { get; set; }
-        //public Parkinglot Parkinglot { get; set; }
         public PortStatus Status { get; set; }
-        //public int ParkingSpaces { get; set; }
         public Parkinglot[] Parkinglots { get; set; }
 
         public Spaceport CreateSpacePort(SpaceParkContext context)
