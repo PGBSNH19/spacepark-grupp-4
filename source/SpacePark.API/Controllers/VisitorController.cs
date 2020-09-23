@@ -26,9 +26,13 @@ namespace SpacePark.API.Controllers
                 var result = await _visitorRepository.GetVisitors();
 
                 if (result == null)
+                {
                     return NotFound();
-
-                return Ok(result);
+                }
+                else
+                {
+                    return Ok(result);
+                }
 
             }
             catch (Exception exeption)
@@ -42,6 +46,28 @@ namespace SpacePark.API.Controllers
         public async Task<ActionResult<Visitor>> PostVisitor(Visitor visitor)
         {
             return Ok(await _visitorRepository.AddVisitor(visitor));
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<ActionResult<Visitor>> DeleteVisitor(string name)
+        {
+
+            var visitorToRemove = _visitorRepository.GetVisitor(name);
+
+            if (visitorToRemove == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _visitorRepository.Delete(visitorToRemove);
+                if (await _visitorRepository.Save())
+                {
+                    return NoContent();
+                }
+
+            }
+            return null;
         }
     }
 }

@@ -2,24 +2,29 @@
 using SpacePark.API.Models;
 using SpacePark.source.Context;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Services
 {
-    public class VisitorRepository : IVisitorRepository
+    public class VisitorRepository : Repository, IVisitorRepository
     {
-        private readonly SpaceParkContext _context;
-        public VisitorRepository(SpaceParkContext context)
-        {
-            _context = context;
 
+        public VisitorRepository(SpaceParkContext context) : base(context)
+        {
+
+
+        }
+        public Visitor GetVisitor(string name)
+        {
+            var visitor = _context.Visitors.Where(x => x.Name == name).First();
+            return visitor;
         }
         public async Task<List<Visitor>> GetVisitors()
         {
             var visitors = await _context.Visitors.ToListAsync();
             return visitors;
         }
-
         public async Task<Visitor> AddVisitor(Visitor newVisitor)
         {
             await _context.Visitors.AddAsync(newVisitor);
@@ -27,5 +32,7 @@ namespace SpacePark.API.Services
 
             return newVisitor;
         }
+
+
     }
 }
