@@ -4,7 +4,7 @@ namespace SpacePark.API.Models
 {
     public class SwapiShipResult
     {
-        [JsonPropertyName("result")]
+        [JsonPropertyName("results")]
         public SwapiShip[] SwapiResult { get; set; }
     }
 }

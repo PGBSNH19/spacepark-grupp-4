@@ -18,7 +18,8 @@ namespace SpacePark.API.Controllers
 
             var response = await client.GetStreamAsync($"https://swapi.dev/api/starships/?search={ shipName }");
             var result = await JsonSerializer.DeserializeAsync<SwapiShipResult>(response);
-
+            if(response == null)
+                return null;
             return result;
         }
     }
