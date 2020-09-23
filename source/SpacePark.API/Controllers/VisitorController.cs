@@ -31,7 +31,7 @@ namespace SpacePark.API.Controllers
                 }
                 else
                 {
-                    return Ok(result);
+                    return NotFound();
                 }
 
             }

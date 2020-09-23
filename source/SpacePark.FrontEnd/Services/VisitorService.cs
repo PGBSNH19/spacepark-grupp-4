@@ -13,7 +13,7 @@ namespace SpacePark.FrontEnd.Services
 
         public VisitorService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://20.54.24.162/");
+            client.BaseAddress = new Uri("http://20.54.24.162:80/");
             Client = client;
         }
 
