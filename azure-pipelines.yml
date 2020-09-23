@@ -22,7 +22,6 @@ steps:
     command: 'publish'
     publishWebProjects: true
     zipAfterPublish: false
-    arguments: '--configuration $(buildConfiguration) --output out'
     workingDirectory: 'source/SpacePark.API'
 
 - task: Docker@2
