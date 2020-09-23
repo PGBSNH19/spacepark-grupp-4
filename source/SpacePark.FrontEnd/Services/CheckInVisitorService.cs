@@ -32,7 +32,7 @@ namespace SpacePark.FrontEnd.Services
                 {
                     using var responseStream = await response.Content.ReadAsStreamAsync();
                     var result = await System.Text.Json.JsonSerializer.DeserializeAsync<ArrayHandler>(responseStream);
-                    returnVisitor = result.VisitorResult[2];
+                    returnVisitor = result.VisitorResult[0];
 
                     var data = new StringContent(JsonConvert.SerializeObject(returnVisitor), Encoding.UTF8, "application/json");
 
