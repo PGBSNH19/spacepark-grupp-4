@@ -12,8 +12,8 @@
         public int SpacePortID { get; set; }
 
         public ParkingStatus Status { get; set; }
-        public int Price { get; set; }
-        public int Length { get; set; }
+        // public int Price { get; set; }
+        // public int Length { get; set; }
 
     }
 }
