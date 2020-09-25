@@ -15,6 +15,5 @@ namespace SpacePark.API.Services
 
             return await query.ToArrayAsync();
         }
-
     }
 }

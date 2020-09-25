@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using SpacePark.API.Models;
+using SpacePark.source.Context;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -28,8 +30,8 @@ namespace SpacePark.FrontEnd.Services
                 var shipResponse = await Client.GetAsync($"API/v1.0/SwapiShip/Ship/{shipname}");
 
 
-                if (shipResponse.IsSuccessStatusCode)
-                {
+                //if (shipResponse.IsSuccessStatusCode)
+                //{
                     using var responseStream = await response.Content.ReadAsStreamAsync();
                     var result = await System.Text.Json.JsonSerializer.DeserializeAsync<ArrayHandler>(responseStream);
                     returnVisitor = result.VisitorResult[0];
@@ -40,11 +42,12 @@ namespace SpacePark.FrontEnd.Services
 
                     if (addResponse.IsSuccessStatusCode)
                     {
+                        var request = await Client.PostAsync($"API/v1.0/Visitor", data);
                         return returnVisitor;
                     }
                     return null;
-                }
-                return null;
+                //}
+                //return null;
 
             }
 

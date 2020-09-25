@@ -6,5 +6,6 @@ namespace SpacePark.API.Models
     public interface ISpaceportRepository : IRepository
     {
         Task<Spaceport[]> GetSpaceports();
+        Task<Spaceport> PostSpacePort();
     }
 }

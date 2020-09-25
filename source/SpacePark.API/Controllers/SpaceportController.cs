@@ -35,5 +35,18 @@ namespace SpacePark.API.Controllers
 
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Spaceport>> PostSpacePort()
+        {
+            try
+            {
+                return Ok(await _spaceportRepository.PostSpacePort());
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
+            }
+        }
     }
 }
