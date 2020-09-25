@@ -12,6 +12,7 @@ namespace SpacePark.API.Controllers
     public class SpaceshipController : ControllerBase
     {
         private readonly ISpaceshipRepository _spaceshipRepository;
+
         public SpaceshipController(ISpaceshipRepository spaceshipRepository)
         {
             _spaceshipRepository = spaceshipRepository;
@@ -34,6 +35,32 @@ namespace SpacePark.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure {exception.Message}");
             }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Spaceship>> PostSpaceship(Spaceship spaceship)
+        {
+            return Ok(await _spaceshipRepository.AddSpaceship(spaceship));
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<ActionResult<Spaceship>> DeleteSpaceship(string name)
+        {
+            var spaceshipToRemove = _spaceshipRepository.GetSpaceship(name);
+
+            if (spaceshipToRemove == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _spaceshipRepository.Delete(spaceshipToRemove);
+                if (await _spaceshipRepository.Save())
+                {
+                    return NoContent();
+                }
+            }
+            return null;
         }
     }
 }
