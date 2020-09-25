@@ -11,7 +11,7 @@ namespace SpacePark.FrontEnd.Services
 
         public CheckOutVisitorService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://localhost:5001");
+            client.BaseAddress = new Uri("http://20.54.24.162:80/");
             Client = client;
         }
 
