@@ -11,12 +11,6 @@ namespace SpacePark.source.Context
 
         public DbSet<Parkinglot> ParkingLots { get; set; }
 
-        public DbSet<Visitor> Visitors { get; set; }
-
-        public DbSet<VisitorParking> VisitorParkings { get; set; }
-
-        //public DbSet<Spaceship> Spaceships { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration config = new ConfigurationBuilder()
