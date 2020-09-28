@@ -35,18 +35,33 @@ namespace SpacePark.API.Controllers
 
             }
         }
+        // //POST:     api/v1.0/spaceport
+        // [HttpPost(Name="PostSpaceport")]
+        // public async Task<ActionResult<Spaceport>> PostSpaceport()
+        // {
+        //     try
+        //     {
+        //         var createdSpaceport = new Spaceport()
+        //         {
+ 
+        //             Parkinglots = new Parkinglot[5]
+        //         };
 
-        [HttpPost]
-        public async Task<ActionResult<Spaceport>> PostSpacePort()
-        {
-            try
-            {
-                return Ok(await _spaceportRepository.PostSpacePort());
-            }
-            catch (Exception exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
-            }
-        }
+        //         for (int i = 0; i < createdSpaceport.Parkinglots.Length; i++)
+        //         {
+        //             createdSpaceport.Parkinglots[i].ParkingLotID = i;
+        //         }
+
+        //         _spaceportRepository.Add(createdSpaceport);
+        //         if(await _spaceportRepository.Save())
+        //             return Created($"api/v1.0/spaceport/{createdSpaceport}", createdSpaceport);
+        //     }
+        //     catch (Exception e)
+        //     {
+
+        //         return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+        //     }
+        //     return BadRequest();
+        // }
     }
 }

@@ -8,7 +8,6 @@ namespace SpacePark.API.Services
     {
         Task<List<Visitor>> GetVisitors();
         Visitor GetVisitor(string name);
-        Task<Visitor> AddVisitor(Visitor visitor);
 
     }
 }

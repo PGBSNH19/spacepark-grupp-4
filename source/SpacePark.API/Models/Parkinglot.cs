@@ -1,4 +1,6 @@
-﻿namespace SpacePark.API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SpacePark.API.Models
 {
     public enum ParkingStatus
     {
@@ -8,12 +10,11 @@
     public class Parkinglot
     {
         public int ParkingLotID { get; set; }
-
-        public int SpacePortID { get; set; }
-
         public ParkingStatus Status { get; set; }
-        // public int Price { get; set; }
-        // public int Length { get; set; }
-
+        public int? VisitorID {get; set;}
+        public Visitor Visitor { get; set; }
+        public Spaceport Spaceport { get; set; }
+        // public Spaceport Spaceport { get; set; }
+        // public int SpaceportID { get; set; }
     }
 }

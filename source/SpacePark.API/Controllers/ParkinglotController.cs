@@ -34,5 +34,53 @@ namespace SpacePark.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
             }
         }
+
+         [HttpPut]
+        public async Task<ActionResult<Parkinglot>> CheckInShip(Visitor visitor)
+        {
+            try
+            {
+                var availableParking = await _parkinglotRepository
+                    .GetAvailableParking(); 
+                if (availableParking == null)
+                    return NotFound($"Can't find any available parkings");
+
+                availableParking.Status = ParkingStatus.Occupied;
+                availableParking.VisitorID = visitor.VisitorID;
+                _parkinglotRepository.Update(availableParking);
+                if (await _parkinglotRepository.Save())
+                    return NoContent();
+            }
+            catch (Exception e)
+            {
+
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Parkinglot>> CheckOutShip(Visitor visitor)
+        {
+            try
+            {
+                var visitorParking = await _parkinglotRepository
+                    .GetVisitorParkingspot(visitor.VisitorID);
+                if (visitorParking == null)
+                    return NotFound($"Can't find any parking with visitor id: {visitor.VisitorID}");
+                visitorParking.Status = ParkingStatus.Available;
+                visitorParking.VisitorID = null;
+                _parkinglotRepository.Update(visitorParking);
+                if (await _parkinglotRepository.Save())
+                    return NoContent();
+            }
+            catch (Exception e)
+            {
+
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+
+            }
+            return BadRequest();
+        }
     }
 }
