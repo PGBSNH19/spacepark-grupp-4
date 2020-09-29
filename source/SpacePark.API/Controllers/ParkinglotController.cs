@@ -80,15 +80,15 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpPut]
-        [Route("Checkout")]
-        public async Task<ActionResult<Parkinglot>> CheckOutShip(Visitor visitor)
+        [Route("Checkout/id")]
+        public async Task<ActionResult<Parkinglot>> CheckOutShip(int id)
         {
             try
             {
                 var visitorParking = await _parkinglotRepository
-                    .GetVisitorParkingspot(visitor.VisitorID);
+                    .GetVisitorParkingspot(id);
                 if (visitorParking == null)
-                    return NotFound($"Can't find any parking with visitor id: {visitor.VisitorID}");
+                    return NotFound($"Can't find any parking with visitor id: {id}");
                 visitorParking.Status = ParkingStatus.Available;
                 visitorParking.VisitorID = null;
                 _parkinglotRepository.Update(visitorParking);
