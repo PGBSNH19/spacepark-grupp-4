@@ -20,8 +20,6 @@ namespace SpacePark.FrontEnd.Pages
         public async Task OnPost(int id)
         {
 
-            string shipname = Request.Form["shipname"];
-
             var response = await _checkOutVisitorService.DeleteVisitor(id);
             if (response != null)
             {

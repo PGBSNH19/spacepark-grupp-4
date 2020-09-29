@@ -80,7 +80,7 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpPut]
-        [Route("Checkout/id")]
+        [Route("Checkout/{id}")]
         public async Task<ActionResult<Parkinglot>> CheckOutShip(int id)
         {
             try
