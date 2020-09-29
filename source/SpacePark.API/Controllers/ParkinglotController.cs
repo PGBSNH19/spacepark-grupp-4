@@ -1,23 +1,23 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
 {
     [Route("API/v1.0/[controller]")]
     [ApiController]
     public class ParkinglotController : ControllerBase
-    { 
+    {
         private readonly IParkinglotRepository _parkinglotRepository;
         public ParkinglotController(IParkinglotRepository parkinglotRepository)
         {
-            _parkinglotRepository= parkinglotRepository;
+            _parkinglotRepository = parkinglotRepository;
 
         }
-        
+
         [HttpGet(Name = "GetParkinglots")]
         public async Task<ActionResult<Parkinglot[]>> GetParkinglots()
         {
@@ -25,7 +25,7 @@ namespace SpacePark.API.Controllers
             {
                 var result = await _parkinglotRepository.GetParkinglots();
 
-                if(result == null) return NotFound();
+                if (result == null) return NotFound();
 
                 return Ok(result);
             }
@@ -42,14 +42,14 @@ namespace SpacePark.API.Controllers
             try
             {
                 var availableParking = await _parkinglotRepository
-                    .GetAvailableParking(); 
+                    .GetAvailableParking();
                 if (availableParking == null)
                     return NotFound($"Can't find any available parkings");
                 return Ok(true);
             }
             catch (Exception e)
             {
-                
+
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
 
             }
@@ -62,7 +62,7 @@ namespace SpacePark.API.Controllers
             try
             {
                 var availableParking = await _parkinglotRepository
-                    .GetAvailableParking(); 
+                    .GetAvailableParking();
                 if (availableParking == null)
                     return NotFound($"Can't find any available parkings");
                 availableParking.Status = ParkingStatus.Occupied;
@@ -80,15 +80,15 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpPut]
-        [Route("Checkout")]
-        public async Task<ActionResult<Parkinglot>> CheckOutShip(Visitor visitor)
+        [Route("Checkout/id")]
+        public async Task<ActionResult<Parkinglot>> CheckOutShip(int id)
         {
             try
             {
                 var visitorParking = await _parkinglotRepository
-                    .GetVisitorParkingspot(visitor.VisitorID);
+                    .GetVisitorParkingspot(id);
                 if (visitorParking == null)
-                    return NotFound($"Can't find any parking with visitor id: {visitor.VisitorID}");
+                    return NotFound($"Can't find any parking with visitor id: {id}");
                 visitorParking.Status = ParkingStatus.Available;
                 visitorParking.VisitorID = null;
                 _parkinglotRepository.Update(visitorParking);

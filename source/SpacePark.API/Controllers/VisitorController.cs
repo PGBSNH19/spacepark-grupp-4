@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
-using SpacePark.source.Context;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
@@ -22,8 +20,9 @@ namespace SpacePark.API.Controllers
         {
             _visitorRepository = visitorRepository;
         }
-        [HttpGet(Name = "GetVisitors")]
-        public async Task<ActionResult<Visitor>> GetVisitors()
+        [HttpGet]
+        [Route("Add")]
+        public async Task<ActionResult<List<Visitor>>> GetVisitors()
         {
             try
             {
@@ -54,14 +53,14 @@ namespace SpacePark.API.Controllers
             {
                 _visitorRepository.Add(visitor);
                 if (await _visitorRepository.Save())
-                    return Created($"api/v1.0/visitors/{visitor.VisitorID}", visitor);
+                    return Ok(visitor);
             }
             catch (Exception e)
             {
 
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
             }
-           
+
             return BadRequest();
         }
 
