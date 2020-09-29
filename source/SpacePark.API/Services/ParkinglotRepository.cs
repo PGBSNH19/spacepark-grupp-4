@@ -15,5 +15,25 @@ namespace SpacePark.API.Services
 
             return await query.ToArrayAsync();
         }
+
+        public async Task<Parkinglot> GetAvailableParking()
+        {
+            var availableParking = 
+                _context.ParkingLots
+                .Where(p => p.Status == ParkingStatus.Available);
+
+            if (availableParking == null)
+                return null;
+            return await availableParking.FirstOrDefaultAsync();
+
+        }
+
+        public async Task<Parkinglot> GetVisitorParkingspot( int visitorId)
+        {
+            var parkingspot = _context.ParkingLots.Where(p => p.VisitorID == visitorId).FirstOrDefaultAsync();
+            if (parkingspot == null)
+                return null;
+            return await parkingspot;
+        }
     }
 }

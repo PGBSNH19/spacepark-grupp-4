@@ -43,9 +43,6 @@ namespace SpacePark.API
             services.AddControllers();
             services.AddScoped<IVisitorRepository, VisitorRepository>();
             services.AddScoped<IParkinglotRepository, ParkinglotRepository>();
-            services.AddScoped<IReceiptRepository, ReceiptRepository>();
-            // services.AddScoped<ISpaceshipRepository, SpaceshipRepository>();
-            // services.AddScoped<IVisitorparkingRepository, VisitorparkingRepository>();
             services.AddScoped<ISpaceportRepository, SpaceportRepository>();
         }
 

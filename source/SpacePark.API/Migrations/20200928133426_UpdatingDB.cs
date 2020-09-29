@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpacePark.API.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class UpdatingDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +25,6 @@ namespace SpacePark.API.Migrations
                 {
                     VisitorID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Payed = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -40,8 +38,9 @@ namespace SpacePark.API.Migrations
                 {
                     ParkingLotID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SpacePortID = table.Column<int>(nullable: false),
-                    ParkingLotOccupied = table.Column<bool>(nullable: false)
+                    Status = table.Column<int>(nullable: false),
+                    VisitorID = table.Column<int>(nullable: true),
+                    SpacePortID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,66 +50,36 @@ namespace SpacePark.API.Migrations
                         column: x => x.SpacePortID,
                         principalTable: "SpacePorts",
                         principalColumn: "SpacePortID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VisitorParkings",
-                columns: table => new
-                {
-                    VistorParkingID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParkingLotID = table.Column<int>(nullable: false),
-                    VisitorID = table.Column<int>(nullable: false),
-                    DateOfEntry = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VisitorParkings", x => x.VistorParkingID);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_VisitorParkings_ParkingLots_ParkingLotID",
-                        column: x => x.ParkingLotID,
-                        principalTable: "ParkingLots",
-                        principalColumn: "ParkingLotID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_VisitorParkings_Visitors_VisitorID",
+                        name: "FK_ParkingLots_Visitors_VisitorID",
                         column: x => x.VisitorID,
                         principalTable: "Visitors",
                         principalColumn: "VisitorID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParkingLots_SpacePortID",
                 table: "ParkingLots",
-                column: "SpacePortID",
-                unique: true);
+                column: "SpacePortID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VisitorParkings_ParkingLotID",
-                table: "VisitorParkings",
-                column: "ParkingLotID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VisitorParkings_VisitorID",
-                table: "VisitorParkings",
+                name: "IX_ParkingLots_VisitorID",
+                table: "ParkingLots",
                 column: "VisitorID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "VisitorParkings");
-
-            migrationBuilder.DropTable(
                 name: "ParkingLots");
 
             migrationBuilder.DropTable(
-                name: "Visitors");
+                name: "SpacePorts");
 
             migrationBuilder.DropTable(
-                name: "SpacePorts");
+                name: "Visitors");
         }
     }
 }

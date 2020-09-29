@@ -10,8 +10,8 @@ using SpacePark.source.Context;
 namespace SpacePark.API.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    [Migration("20200916122726_addedmissingprops")]
-    partial class addedmissingprops
+    [Migration("20200929065508_AddedOnModelCreate")]
+    partial class AddedOnModelCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,18 +28,54 @@ namespace SpacePark.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("ParkingLotOccupied")
-                        .HasColumnType("bit");
+                    b.Property<int>("SpaceportID")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SpacePortID")
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VisitorID")
                         .HasColumnType("int");
 
                     b.HasKey("ParkingLotID");
 
-                    b.HasIndex("SpacePortID")
-                        .IsUnique();
+                    b.HasIndex("SpaceportID");
+
+                    b.HasIndex("VisitorID");
 
                     b.ToTable("ParkingLots");
+
+                    b.HasData(
+                        new
+                        {
+                            ParkingLotID = 1,
+                            SpaceportID = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ParkingLotID = 2,
+                            SpaceportID = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ParkingLotID = 3,
+                            SpaceportID = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ParkingLotID = 4,
+                            SpaceportID = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            ParkingLotID = 5,
+                            SpaceportID = 1,
+                            Status = 0
+                        });
                 });
 
             modelBuilder.Entity("SpacePark.API.Models.Spaceport", b =>
@@ -55,6 +91,13 @@ namespace SpacePark.API.Migrations
                     b.HasKey("SpacePortID");
 
                     b.ToTable("SpacePorts");
+
+                    b.HasData(
+                        new
+                        {
+                            SpacePortID = 1,
+                            Status = 0
+                        });
                 });
 
             modelBuilder.Entity("SpacePark.API.Models.Visitor", b =>
@@ -67,61 +110,22 @@ namespace SpacePark.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Payed")
-                        .HasColumnType("int");
-
                     b.HasKey("VisitorID");
 
                     b.ToTable("Visitors");
                 });
 
-            modelBuilder.Entity("SpacePark.API.Models.VisitorParking", b =>
-                {
-                    b.Property<int>("VistorParkingID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfEntry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ParkingLotID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VisitorID")
-                        .HasColumnType("int");
-
-                    b.HasKey("VistorParkingID");
-
-                    b.HasIndex("ParkingLotID");
-
-                    b.HasIndex("VisitorID");
-
-                    b.ToTable("VisitorParkings");
-                });
-
             modelBuilder.Entity("SpacePark.API.Models.Parkinglot", b =>
                 {
-                    b.HasOne("SpacePark.API.Models.Spaceport", null)
-                        .WithOne("Parkinglot")
-                        .HasForeignKey("SpacePark.API.Models.Parkinglot", "SpacePortID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SpacePark.API.Models.VisitorParking", b =>
-                {
-                    b.HasOne("SpacePark.API.Models.Parkinglot", "Parkinglot")
-                        .WithMany()
-                        .HasForeignKey("ParkingLotID")
+                    b.HasOne("SpacePark.API.Models.Spaceport", "Spaceport")
+                        .WithMany("Parkinglots")
+                        .HasForeignKey("SpaceportID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SpacePark.API.Models.Visitor", "Vistor")
+                    b.HasOne("SpacePark.API.Models.Visitor", "Visitor")
                         .WithMany()
-                        .HasForeignKey("VisitorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VisitorID");
                 });
 #pragma warning restore 612, 618
         }

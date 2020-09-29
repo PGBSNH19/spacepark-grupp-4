@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using SpacePark.source.Context;
 
@@ -11,9 +12,10 @@ namespace SpacePark.API.Models
     }
     public class Spaceport
     {
+        [Key]
         public int SpacePortID { get; set; }
         public PortStatus Status { get; set; }
-        public Parkinglot[] Parkinglots { get; set; }
+        public ICollection<Parkinglot> Parkinglots { get; set; }
 
     }
 }

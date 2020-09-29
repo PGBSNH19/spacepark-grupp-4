@@ -25,14 +25,5 @@ namespace SpacePark.API.Services
             var visitors = await _context.Visitors.ToListAsync();
             return visitors;
         }
-        public async Task<Visitor> AddVisitor(Visitor newVisitor)
-        {
-            await _context.Visitors.AddAsync(newVisitor);
-            await _context.SaveChangesAsync();
-
-            return newVisitor;
-        }
-
-
     }
 }

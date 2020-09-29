@@ -16,12 +16,11 @@ namespace SpacePark.API.Controllers
     public class VisitorController : ControllerBase
     {
         private readonly IVisitorRepository _visitorRepository;
-        private readonly SpaceParkContext _context;
+        //private readonly SpaceParkContext _context;
 
-        public VisitorController(IVisitorRepository visitorRepository, SpaceParkContext context)
+        public VisitorController(IVisitorRepository visitorRepository)
         {
             _visitorRepository = visitorRepository;
-            _context = context;
         }
         [HttpGet(Name = "GetVisitors")]
         public async Task<ActionResult<Visitor>> GetVisitors()
@@ -47,39 +46,25 @@ namespace SpacePark.API.Controllers
             }
         }
 
+        //POST:     api/v1.0/visitors
         [HttpPost]
         public async Task<ActionResult<Visitor>> PostVisitor(Visitor visitor)
         {
-            await ParkShip(visitor);
-            return Ok(await _visitorRepository.AddVisitor(visitor));
-        }
-
-        public async Task<VisitorParking[]> GetVisitorParkings()
-        {
-            IQueryable<VisitorParking> query = _context.VisitorParkings.OrderBy(visitorparking => visitorparking.VistorParkingID);
-
-            return await query.ToArrayAsync();
-        }
-        public async Task<ActionResult> ParkShip(Visitor visitor)
-        {
-            var parkings = GetVisitorParkings();
-            var parking = parkings.Result.Where(x => x.Parkinglot.Status == ParkingStatus.Available).FirstOrDefault();
-            // parking.Parkinglot.Status = ParkingStatus.Occupied;
-            // parking.VisitorID= visitor.VisitorID;
-
-            var parkinglot = _context.ParkingLots.Where(x => x.ParkingLotID == parking.ParkingLotID).FirstOrDefault();
-            //parkinglot.Status= ParkingStatus.Occupied;
-
-            var visitorparking = new VisitorParking
+            try
             {
-                VisitorID = visitor.VisitorID,
-                ParkingLotID = parkinglot.ParkingLotID,
-                DateOfEntry = DateTime.Now
-            };
+                _visitorRepository.Add(visitor);
+                if (await _visitorRepository.Save())
+                    return Created($"api/v1.0/visitors/{visitor.VisitorID}", visitor);
+            }
+            catch (Exception e)
+            {
 
-            await _context.VisitorParkings.AddAsync(visitorparking);
-            return Ok(await _context.SaveChangesAsync());
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+            }
+           
+            return BadRequest();
         }
+
         [HttpDelete("{name}")]
         public async Task<ActionResult<Visitor>> DeleteVisitor(string name)
         {

@@ -16,24 +16,5 @@ namespace SpacePark.API.Services
 
             return await query.ToArrayAsync();
         }
-
-        public async Task<Spaceport> PostSpacePort()
-        {
-            var spacePortData = _context.SpacePorts.FirstOrDefault();
-
-            if (spacePortData == null)
-            {
-
-                var spacePort = new Spaceport
-                {
-                    Parkinglots = new Parkinglot[5],
-                    Status = PortStatus.Open
-                };
-                await _context.SpacePorts.AddAsync(spacePort);
-                await _context.SaveChangesAsync();
-                return spacePort;
-            }
-            return null;
-        }
     }
 }
