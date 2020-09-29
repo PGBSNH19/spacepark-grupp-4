@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -17,6 +18,7 @@ namespace SpacePark.FrontEnd.Services
             Client = client;
         }
         //ublic Visitor returnVisitor { get; private set; }
+
 
         public async Task<Visitor> PostVisitor(string visitorname, string shipname)
         {
@@ -38,20 +40,34 @@ namespace SpacePark.FrontEnd.Services
 
                         var data = new StringContent(JsonConvert.SerializeObject(returnVisitor), Encoding.UTF8, "application/json");
 
-                        var visitorResponse = await Client.PostAsync($"API/v1.0/Visitor", data);
+                        var visitorToCreate = await Client.PostAsync($"API/v1.0/Visitor", data);
 
-                        using var visitorResponseStream = await visitorResponse.Content.ReadAsStreamAsync();
-                        var visitorResult = await System.Text.Json.JsonSerializer.DeserializeAsync<Visitor>(visitorResponseStream);
 
-                        if (visitorResponse.IsSuccessStatusCode)
+
+                        if (visitorToCreate.IsSuccessStatusCode)
                         {
-                            var checkinData = new StringContent(JsonConvert.SerializeObject(visitorResult), Encoding.UTF8, "application/json");
+                            var visitorResponse = await Client.GetAsync($"API/v1.0/Visitor/Add");
 
-                            var checkin = await Client.PutAsync($"API/v1.0/Parkinglot/Checkin", checkinData);
-                            if (checkin.IsSuccessStatusCode)
+                            using var responseStream = await visitorResponse.Content.ReadAsStreamAsync();
+
+                            var result = await System.Text.Json.JsonSerializer.DeserializeAsync<Visitor[]>(responseStream);
+
+
+
+                            Visitor putVisitor = new Visitor();
+
+                            putVisitor = result.Where(x => x.Name == visitorname).Last();
+
+                            var visitorData = new StringContent(JsonConvert.SerializeObject(putVisitor), Encoding.UTF8, "application/json");
+                            if (visitorResponse.IsSuccessStatusCode)
                             {
-                                return visitorResult;
+                                var checkinResponse = await Client.PutAsync($"API/v1.0/ParkingLot/Checkin", visitorData);
+                                if (checkinResponse.IsSuccessStatusCode)
+                                {
+                                    return putVisitor;
+                                }
                             }
+
                         }
                         return null;
                     }
@@ -71,12 +87,17 @@ namespace SpacePark.FrontEnd.Services
         public Visitor[] VisitorResult { get; set; }
     }
 
+    public class ArrayHandlerDB
+    {
+        public Visitor[] VisitorDBResult { get; set; }
+    }
+
     public class Visitor
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonPropertyName("visitorID")]
         public int VisitorID { get; set; }
     }
 

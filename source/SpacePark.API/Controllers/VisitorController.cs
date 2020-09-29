@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SpacePark.API.Models;
 using SpacePark.API.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
@@ -19,8 +20,9 @@ namespace SpacePark.API.Controllers
         {
             _visitorRepository = visitorRepository;
         }
-        [HttpGet(Name = "GetVisitors")]
-        public async Task<ActionResult<Visitor>> GetVisitors()
+        [HttpGet]
+        [Route("Add")]
+        public async Task<ActionResult<List<Visitor>>> GetVisitors()
         {
             try
             {
