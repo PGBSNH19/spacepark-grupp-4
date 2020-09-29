@@ -13,6 +13,7 @@ namespace SpacePark.API.Models
         public ParkingStatus Status { get; set; }
         public int? VisitorID {get; set;}
         public Visitor Visitor { get; set; }
+        public int SpaceportID { get; set; }
         public Spaceport Spaceport { get; set; }
         // public Spaceport Spaceport { get; set; }
         // public int SpaceportID { get; set; }

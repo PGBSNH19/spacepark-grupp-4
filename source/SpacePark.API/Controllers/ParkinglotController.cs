@@ -35,7 +35,28 @@ namespace SpacePark.API.Controllers
             }
         }
 
-         [HttpPut]
+        [HttpGet]
+        [Route("Check")]
+        public async Task<ActionResult<bool>> GetAvailableParking()
+        {
+            try
+            {
+                var availableParking = await _parkinglotRepository
+                    .GetAvailableParking(); 
+                if (availableParking == null)
+                    return NotFound($"Can't find any available parkings");
+                return Ok(true);
+            }
+            catch (Exception e)
+            {
+                
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+
+            }
+        }
+
+        [HttpPut]
+        [Route("Checkin")]
         public async Task<ActionResult<Parkinglot>> CheckInShip(Visitor visitor)
         {
             try
@@ -44,7 +65,6 @@ namespace SpacePark.API.Controllers
                     .GetAvailableParking(); 
                 if (availableParking == null)
                     return NotFound($"Can't find any available parkings");
-
                 availableParking.Status = ParkingStatus.Occupied;
                 availableParking.VisitorID = visitor.VisitorID;
                 _parkinglotRepository.Update(availableParking);
@@ -60,6 +80,7 @@ namespace SpacePark.API.Controllers
         }
 
         [HttpPut]
+        [Route("Checkout")]
         public async Task<ActionResult<Parkinglot>> CheckOutShip(Visitor visitor)
         {
             try

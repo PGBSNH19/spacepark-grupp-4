@@ -25,29 +25,38 @@ namespace SpacePark.source.Context
             builder.Entity<Spaceport>().ToTable("SpacePorts");
             builder.Entity<Spaceport>().HasKey(x=> x.SpacePortID);
             builder.Entity<Spaceport>().HasData(new {
-                PortStatus = PortStatus.Open,
+                
+                Status = PortStatus.Open,
+                SpacePortID = 1
                 
             });
 
             builder.Entity<Parkinglot>().ToTable("ParkingLots");
             builder.Entity<Parkinglot>().HasKey(x => x.ParkingLotID);
             builder.Entity<Parkinglot>().HasData(new {
-                ParkingStatus = ParkingStatus.Available,
+                Status = ParkingStatus.Available,
+                ParkingLotID = 1,
+                SpaceportID = 1
             },
             new {
-                ParkingStatus = ParkingStatus.Available,
+                Status = ParkingStatus.Available,
+                ParkingLotID = 2,
+                SpaceportID = 1
             },
             new {
-                ParkingStatus = ParkingStatus.Available,
-
+                Status = ParkingStatus.Available,
+                ParkingLotID = 3,
+                SpaceportID = 1
             },
             new {
-                ParkingStatus = ParkingStatus.Available,
-
+                Status = ParkingStatus.Available,
+                ParkingLotID = 4,
+                SpaceportID = 1
             },
             new {
-                ParkingStatus = ParkingStatus.Available,
-
+                Status = ParkingStatus.Available,
+                ParkingLotID = 5,
+                SpaceportID = 1
             });
 
         }

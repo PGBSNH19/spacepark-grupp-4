@@ -47,7 +47,7 @@ namespace SpacePark.API.Controllers
         }
 
         //POST:     api/v1.0/visitors
-        [HttpPost(Name = "PostVisitor")]
+        [HttpPost]
         public async Task<ActionResult<Visitor>> PostVisitor(Visitor visitor)
         {
             try

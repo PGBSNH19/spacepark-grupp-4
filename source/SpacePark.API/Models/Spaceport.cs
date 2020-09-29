@@ -15,7 +15,7 @@ namespace SpacePark.API.Models
         [Key]
         public int SpacePortID { get; set; }
         public PortStatus Status { get; set; }
-        public Parkinglot[] Parkinglots { get; set; }
+        public ICollection<Parkinglot> Parkinglots { get; set; }
 
     }
 }
