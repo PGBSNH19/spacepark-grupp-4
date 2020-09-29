@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -16,17 +19,34 @@ namespace SpacePark.FrontEnd.Services
         }
 
 
-        public async Task<HttpResponseMessage> DeleteVisitor(string visitorname)
+        public async Task<HttpResponseMessage> DeleteVisitor(int id)
         {
-            var response = await Client.DeleteAsync($"API/v1.0/Visitor/{visitorname}");
-            if (response.IsSuccessStatusCode)
+
+            var visitorResponse = await Client.GetAsync($"API/v1.0/Visitor/Add");
+
+            if (visitorResponse.IsSuccessStatusCode)
             {
-                return response;
+
+                using var responseStream = await visitorResponse.Content.ReadAsStreamAsync();
+
+                var result = await System.Text.Json.JsonSerializer.DeserializeAsync<Visitor[]>(responseStream);
+
+                Visitor putVisitor = new Visitor();
+
+                putVisitor = result.Where(x => x.VisitorID == id).FirstOrDefault();
+
+                var visitorData = new StringContent(JsonConvert.SerializeObject(putVisitor), Encoding.UTF8, "application/json");
+
+                var putVisitorResponse = await Client.PutAsync($"API/v1.0/ParkingLot/Checkout", visitorData);
+
+
+                if (putVisitorResponse.IsSuccessStatusCode)
+                {
+                    return putVisitorResponse;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
+
         }
     }
 

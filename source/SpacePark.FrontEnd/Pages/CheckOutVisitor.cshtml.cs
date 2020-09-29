@@ -17,12 +17,12 @@ namespace SpacePark.FrontEnd.Pages
             _checkOutVisitorService = checkOutVisitorService;
         }
 
-        public async Task OnPost()
+        public async Task OnPost(int id)
         {
-            string visitorName = Request.Form["visitorname"];
+
             string shipname = Request.Form["shipname"];
 
-            var response = await _checkOutVisitorService.DeleteVisitor(visitorName);
+            var response = await _checkOutVisitorService.DeleteVisitor(id);
             if (response != null)
             {
                 PageCheck = true;
