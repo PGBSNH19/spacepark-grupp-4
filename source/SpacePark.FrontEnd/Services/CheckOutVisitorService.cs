@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -11,22 +13,25 @@ namespace SpacePark.FrontEnd.Services
 
         public CheckOutVisitorService(HttpClient client)
         {
-            client.BaseAddress = new Uri("http://20.54.24.162:80/");
+            client.BaseAddress = new Uri("https://spaceparkbackendgroup4.azurewebsites.net/");
             Client = client;
         }
 
 
-        public async Task<HttpResponseMessage> DeleteVisitor(string visitorname)
+        public async Task<HttpResponseMessage> DeleteVisitor(int id)
         {
-            var response = await Client.DeleteAsync($"API/v1.0/Visitor/{visitorname}");
-            if (response.IsSuccessStatusCode)
+            var visitorData = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
+
+            var putVisitorResponse = await Client.PutAsync($"API/v1.0/ParkingLot/Checkout/{id}", visitorData);
+
+
+            if (putVisitorResponse.IsSuccessStatusCode)
             {
-                return response;
+                return putVisitorResponse;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
+
         }
     }
 

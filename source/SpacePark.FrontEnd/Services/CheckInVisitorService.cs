@@ -14,7 +14,7 @@ namespace SpacePark.FrontEnd.Services
 
         public CheckInVisitorService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://localhost:5001/");
+            client.BaseAddress = new Uri("https://spaceparkbackendgroup4.azurewebsites.net/");
             Client = client;
         }
         //ublic Visitor returnVisitor { get; private set; }
