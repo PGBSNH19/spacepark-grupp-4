@@ -23,11 +23,12 @@ steps:
     publishWebProjects: true
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.FrontEnd'
-- task: CopyFiles@2
+- task: Docker@2
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)/source/SpacePark.FrontEnd
-    targetFolder: $(Build.ArtifactStagingDirectory)
-
+    containerRegistry: 'SpaceParkContainer4'
+    repository: 'spaceparkfrontend'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
