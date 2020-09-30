@@ -20,7 +20,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'source\SpacePark.FrontEnd/SpacePark.FrontEnd.csproj'
+    projects: 'source\SpacePark.FrontEnd\SpacePark.FrontEnd.csproj'
 
 
 - task: DotNetCoreCLI@2
@@ -28,7 +28,7 @@ steps:
     command: 'publish'
     publishWebProjects: true
     zipAfterPublish: false
-    workingDirectory: 'source/SpacePark.API'
+    workingDirectory: 'source\SpacePark.FrontEnd'
 
 
 - task: PublishBuildArtifacts@1
