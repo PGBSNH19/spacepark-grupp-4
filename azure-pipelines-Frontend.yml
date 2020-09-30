@@ -25,7 +25,7 @@ steps:
     workingDirectory: 'source/SpacePark.FrontEnd'
 - task: CopyFiles@2
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)
+    sourceFolder: $(Build.SourcesDirectory)/_PGBSNH19.spacepark-grupp-4-Frontend Pipeline/frontend/source/SpacePark.FrontEnd
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
