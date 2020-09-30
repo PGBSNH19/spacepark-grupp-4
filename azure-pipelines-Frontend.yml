@@ -23,7 +23,7 @@ steps:
     projects: 'source\SpacePark.FrontEnd/SpacePark.FrontEnd.csproj'
     workingDirectory: 'source\SpacePark.FrontEnd'
 
--- task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
