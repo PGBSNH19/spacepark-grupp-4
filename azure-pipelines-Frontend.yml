@@ -16,23 +16,19 @@ steps:
     version: '5.0.x'
     includePreviewVersions: true # Required for preview versions
 
-- task: UseDotNet@2
-  inputs:
-    version: '3.0.x'
-    packageType: runtime
  
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'source\SpacePark.FrontEnd/SpacePark.FrontEnd.csproj'
-    workingDirectory: 'source\SpacePark.FrontEnd'
+    projects: 'source\SpacePark.FrontEnd\SpacePark.FrontEnd.csproj'
+
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: false
+    workingDirectory: 'source\SpacePark.FrontEnd'
 
 
 - task: PublishBuildArtifacts@1
