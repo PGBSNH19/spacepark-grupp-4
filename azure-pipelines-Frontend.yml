@@ -11,16 +11,15 @@ pool:
 
 steps:
 
-- task: UseDotNet@2
+- task: NuGetCommand@2
   inputs:
-    version: '5.0.x'
-    includePreviewVersions: true # Required for preview versions
-
- 
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'source\SpacePark.FrontEnd\SpacePark.FrontEnd.csproj'
+    projects: 'source/SpacePark.FrontEnd'
 
 
 - task: DotNetCoreCLI@2
@@ -28,10 +27,16 @@ steps:
     command: 'publish'
     publishWebProjects: true
     zipAfterPublish: false
-    workingDirectory: 'source\SpacePark.FrontEnd'
+    workingDirectory: 'source/SpacePark.FrontEnd'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'SpaceParkContainer4'
+    repository: 'spaceparkfrontend'
+    command: 'buildAndPush'
+    Dockerfile: '**/FrontEndDockerfile'
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName'
+    artifactName: 'frontend'
