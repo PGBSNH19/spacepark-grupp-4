@@ -23,6 +23,7 @@ steps:
     publishWebProjects: true
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.API'
+    
 
 - task: Docker@2
   inputs:
@@ -30,6 +31,11 @@ steps:
     repository: 'spaceparkbackend'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
