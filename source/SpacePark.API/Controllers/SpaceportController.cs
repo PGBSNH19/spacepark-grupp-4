@@ -1,8 +1,8 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpacePark.API.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace SpacePark.API.Controllers
 {
@@ -24,13 +24,13 @@ namespace SpacePark.API.Controllers
             {
                 var result = await _spaceportRepository.GetSpaceports();
 
-                if(result == null) return NotFound();
+                if (result == null) return NotFound();
 
                 return Ok(result);
             }
             catch (Exception exception)
             {
-                
+
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
 
             }
