@@ -29,7 +29,7 @@ steps:
     containerRegistry: 'SpaceParkContainer4'
     repository: 'spaceparkfrontend'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: 'SpacePark.FrontEnd/Dockerfile'
 
 - task: PublishBuildArtifacts@1
   inputs:
