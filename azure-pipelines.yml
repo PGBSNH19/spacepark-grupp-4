@@ -16,6 +16,10 @@ steps:
     command: 'build'
     projects: 'source/SpacePark.API/SpacePark.API.csproj'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'source/SpacePark.Tests'
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -24,10 +28,7 @@ steps:
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.API'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'source/SpacePark.Tests'
+
 
 - task: Docker@2
   inputs:
