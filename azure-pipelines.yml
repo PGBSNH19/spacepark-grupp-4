@@ -8,13 +8,22 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  
+variables:
+  buildConfiguration: 'Release'
 steps:
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'source/SpacePark.API/SpacePark.API.csproj'
+
+
+- task: DotNetCoreCLI@2
+  inputs: 
+    command: test
+    projects: 'Source/SpacePark.Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 
 - task: DotNetCoreCLI@2
