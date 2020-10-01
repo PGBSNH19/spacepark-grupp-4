@@ -23,7 +23,11 @@ steps:
     publishWebProjects: true
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.API'
-    
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'source/SpacePark.Tests'
 
 - task: Docker@2
   inputs:
