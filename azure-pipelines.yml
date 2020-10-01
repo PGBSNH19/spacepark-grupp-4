@@ -32,6 +32,7 @@ steps:
     publishWebProjects: true
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.API'
+    arguments: '--configuration $(buildConfiguration)'
 
 
 
