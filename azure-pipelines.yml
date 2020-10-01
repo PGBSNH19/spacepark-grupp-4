@@ -8,7 +8,9 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  
+variables:
+  buildConfiguration: 'Release'
 steps:
 
 - task: DotNetCoreCLI@2
@@ -23,7 +25,9 @@ steps:
     publishWebProjects: true
     zipAfterPublish: false
     workingDirectory: 'source/SpacePark.API'
-    
+    arguments: '--configuration $(buildConfiguration)'
+
+
 
 - task: Docker@2
   inputs:
