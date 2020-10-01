@@ -16,10 +16,6 @@ steps:
     command: 'build'
     projects: 'source/SpacePark.API/SpacePark.API.csproj'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'source/SpacePark.Tests'
 
 - task: DotNetCoreCLI@2
   inputs:
