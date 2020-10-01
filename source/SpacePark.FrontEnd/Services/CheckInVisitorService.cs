@@ -11,23 +11,17 @@ namespace SpacePark.FrontEnd.Services
     public class CheckInVisitorService
     {
         public HttpClient Client { get; }
-
         public CheckInVisitorService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://spaceparkbackendgroup4.azurewebsites.net/");
             Client = client;
         }
-        //ublic Visitor returnVisitor { get; private set; }
-
-
         public async Task<Visitor> PostVisitor(string visitorname, string shipname)
         {
-
             var checkresponse = await Client.GetAsync($"API/v1.0/ParkingLot/Check");
             if (checkresponse.IsSuccessStatusCode)
             {
                 var response = await Client.GetAsync($"API/v1.0/SwapiVisitor/Character/{visitorname}");
-
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,28 +31,18 @@ namespace SpacePark.FrontEnd.Services
                     {
                         Visitor returnVisitor = new Visitor();
                         returnVisitor.Name = visitorname;
-
                         var data = new StringContent(JsonConvert.SerializeObject(returnVisitor), Encoding.UTF8, "application/json");
-
                         var visitorToCreate = await Client.PostAsync($"API/v1.0/Visitor", data);
-
-
 
                         if (visitorToCreate.IsSuccessStatusCode)
                         {
                             var visitorResponse = await Client.GetAsync($"API/v1.0/Visitor/Add");
-
                             using var responseStream = await visitorResponse.Content.ReadAsStreamAsync();
-
                             var result = await System.Text.Json.JsonSerializer.DeserializeAsync<Visitor[]>(responseStream);
-
-
-
                             Visitor putVisitor = new Visitor();
-
                             putVisitor = result.Where(x => x.Name == visitorname).Last();
-
                             var visitorData = new StringContent(JsonConvert.SerializeObject(putVisitor), Encoding.UTF8, "application/json");
+
                             if (visitorResponse.IsSuccessStatusCode)
                             {
                                 var checkinResponse = await Client.PutAsync($"API/v1.0/ParkingLot/Checkin", visitorData);
@@ -67,19 +51,13 @@ namespace SpacePark.FrontEnd.Services
                                     return putVisitor;
                                 }
                             }
-
                         }
                         return null;
                     }
-
                 }
             }
-
             return null;
-
-
         }
-
     }
     public class ArrayHandler
     {
@@ -100,5 +78,4 @@ namespace SpacePark.FrontEnd.Services
         [JsonPropertyName("visitorID")]
         public int VisitorID { get; set; }
     }
-
 }

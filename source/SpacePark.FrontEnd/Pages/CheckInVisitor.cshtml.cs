@@ -8,12 +8,9 @@ namespace SpacePark.FrontEnd.Pages
     {
 
         private readonly CheckInVisitorService _checkInVisitorService;
-
         public Visitor visitor { get; private set; }
-
         public CheckInVisitorModel(CheckInVisitorService checkInVisitorService)
         {
-
             _checkInVisitorService = checkInVisitorService;
         }
 
@@ -21,23 +18,17 @@ namespace SpacePark.FrontEnd.Pages
         {
             string visitorname = Request.Form["visitorname"];
             string shipname = Request.Form["shipname"];
-
             var response = _checkInVisitorService.PostVisitor(visitorname, shipname);
 
             if (response != null)
-            {
                 visitor = new Visitor
                 {
                     Name = response.Result.Name,
                     VisitorID = response.Result.VisitorID
                 };
-            }
+                
             else
-            {
                 visitor = null;
-            }
-
-
         }
     }
 }

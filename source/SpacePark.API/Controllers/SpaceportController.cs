@@ -11,7 +11,6 @@ namespace SpacePark.API.Controllers
     public class SpaceportController : ControllerBase
     {
         private readonly ISpaceportRepository _spaceportRepository;
-
         public SpaceportController(ISpaceportRepository spaceportRepository)
         {
             _spaceportRepository = spaceportRepository;
@@ -23,16 +22,13 @@ namespace SpacePark.API.Controllers
             try
             {
                 var result = await _spaceportRepository.GetSpaceports();
-
-                if (result == null) return NotFound();
-
+                if (result == null) 
+                    return NotFound();
                 return Ok(result);
             }
             catch (Exception exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {exception.Message}");
-
             }
         }
     }

@@ -14,10 +14,8 @@ namespace SpacePark.API.Services
         {
             IQueryable<Parkinglot> query = _context.ParkingLots.OrderBy(parkinglot => parkinglot.ParkingLotID);
             _logger.LogInformation($"[LOG] Requesting all parkings");
-
             return await query.ToArrayAsync();
         }
-
         public async Task<Parkinglot> GetAvailableParking()
         {
             var availableParking = 
@@ -32,7 +30,6 @@ namespace SpacePark.API.Services
             }
             _logger.LogInformation($"[LOG ]Reguested first available parking from DB");
             return await availableParking.FirstOrDefaultAsync();
-
         }
 
         public async Task<Parkinglot> GetVisitorParkingspot( int visitorId)

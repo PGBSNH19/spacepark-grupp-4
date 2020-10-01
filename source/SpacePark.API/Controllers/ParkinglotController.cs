@@ -15,7 +15,6 @@ namespace SpacePark.API.Controllers
         public ParkinglotController(IParkinglotRepository parkinglotRepository)
         {
             _parkinglotRepository = parkinglotRepository;
-
         }
 
         [HttpGet(Name = "GetParkinglots")]
@@ -24,9 +23,8 @@ namespace SpacePark.API.Controllers
             try
             {
                 var result = await _parkinglotRepository.GetParkinglots();
-
-                if (result == null) return NotFound();
-
+                if (result == null) 
+                    return NotFound();
                 return Ok(result);
             }
             catch (Exception exception)
@@ -49,9 +47,7 @@ namespace SpacePark.API.Controllers
             }
             catch (Exception e)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
-
             }
         }
 
@@ -73,7 +69,6 @@ namespace SpacePark.API.Controllers
             }
             catch (Exception e)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
             }
             return BadRequest();
@@ -97,9 +92,7 @@ namespace SpacePark.API.Controllers
             }
             catch (Exception e)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
-
             }
             return BadRequest();
         }
