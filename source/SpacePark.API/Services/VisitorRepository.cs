@@ -9,11 +9,8 @@ namespace SpacePark.API.Services
 {
     public class VisitorRepository : Repository, IVisitorRepository
     {
-
         public VisitorRepository(SpaceParkContext context) : base(context)
         {
-
-
         }
         public Visitor GetVisitor(string name)
         {

@@ -12,10 +12,8 @@ namespace SpacePark.API.Services
         public async Task<Parkinglot[]> GetParkinglots()
         {
             IQueryable<Parkinglot> query = _context.ParkingLots.OrderBy(parkinglot => parkinglot.ParkingLotID);
-
             return await query.ToArrayAsync();
         }
-
         public async Task<Parkinglot> GetAvailableParking()
         {
             var availableParking = 
@@ -25,7 +23,6 @@ namespace SpacePark.API.Services
             if (availableParking == null)
                 return null;
             return await availableParking.FirstOrDefaultAsync();
-
         }
 
         public async Task<Parkinglot> GetVisitorParkingspot( int visitorId)

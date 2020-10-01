@@ -16,25 +16,17 @@ namespace SpacePark.FrontEnd.Services
             client.BaseAddress = new Uri("https://spaceparkbackendgroup4.azurewebsites.net/");
             Client = client;
         }
-
-
         public async Task<HttpResponseMessage> DeleteVisitor(int id)
         {
             var visitorData = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
-
             var putVisitorResponse = await Client.PutAsync($"API/v1.0/ParkingLot/Checkout/{id}", visitorData);
 
-
             if (putVisitorResponse.IsSuccessStatusCode)
-            {
                 return putVisitorResponse;
-            }
-
-            return null;
-
+            else
+                return null;
         }
     }
-
     public class VisitorToDelete
     {
         [JsonPropertyName("name")]

@@ -9,11 +9,9 @@ namespace SpacePark.API.Services
     public class SpaceportRepository : Repository, ISpaceportRepository
     {
         public SpaceportRepository(SpaceParkContext context) : base(context) { }
-
         public async Task<Spaceport[]> GetSpaceports()
         {
             IQueryable<Spaceport> query = _context.SpacePorts.OrderBy(spaceport => spaceport.SpacePortID);
-
             return await query.ToArrayAsync();
         }
     }

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+
 namespace SpacePark.API.Controllers
 {
 
@@ -15,9 +16,9 @@ namespace SpacePark.API.Controllers
         public async Task<SwapiShipResult> GetStarWarsShip(string shipName)
         {
             using HttpClient client = new HttpClient();
-
             var response = await client.GetStreamAsync($"https://swapi.dev/api/starships/?search={ shipName }");
             var result = await JsonSerializer.DeserializeAsync<SwapiShipResult>(response);
+
             if(response == null)
                 return null;
             return result;
