@@ -167,7 +167,9 @@ Azure SQLDB:				Gen5 - General Purpose (GP_Gen5_2)
 
 ​										 x 41.6
 
-										 ESTIMATED COST / MONTH3364.11 SEK
+										 ESTIMATED COST / MONTH 3364.11 SEK
+
+
 
 
 
@@ -186,8 +188,8 @@ Azure SQLDB:				Gen5 - General Purpose (GP_S_Gen5_1)
 ​										x 41.6
 
 										ESTIMATED STORAGE COST / MONTH 45.98 SEK
-
 										COMPUTE COST / VCORE / SECOND 10.001292 SEK
+
 
 
 
