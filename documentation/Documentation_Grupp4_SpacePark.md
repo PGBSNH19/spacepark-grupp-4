@@ -20,7 +20,7 @@ Främst fokus på att förstå CI/CD och sätta upp relevant (för oss) deployme
 
 ### DB:
 
-![img](C:\Users\mkugi\Desktop\q_YiC6rl6vI0ykbTPYl5QudiZFnTWqzgJC5-MTLqf6kMec9kzs9y-GzZtqGiA9UlOlXG7NQi5HBbCFESztiqPxNk4voH-3Y2h2cCfVNxC-AfbY0-fxeBaH2kkLeXydnuwkXKEi0h)
+![img](img/dbsetup.PNG)
 
 
 
@@ -186,7 +186,7 @@ Azure SQLDB:					Gen5 - General Purpose (GP_S_Gen5_1)
 ​											 x 41.6
 
 											 #### ESTIMATED STORAGE COST / MONTH 45.98 SEK
-
+	
 											 #### COMPUTE COST / VCORE / SECOND 10.001292 SEK
 
 
@@ -197,7 +197,7 @@ Vi har Provisioned nu men hade vi gjort ett verkligt projekt och det hade kostat
 
 ### DB Usage:
 
-![img](C:\Users\mkugi\Desktop\6UjhM_QCRc5HnxCvNJGTeQY3JPFmm0uoX3m5heAJBxf9VVPIYIquBJQU-g-eBPnuV4YsTANgmjRZ9NTXTRglFmza2qM0jck9elEDvSbAYv_jadQWxsLthFkEvm3S-uYg3lZrf-RN)
+![img](img/usage.PNG)
 
 
 
