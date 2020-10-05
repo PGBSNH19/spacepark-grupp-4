@@ -4,6 +4,20 @@
 
 
 
+## Process
+
+Vi började med att sätta upp folderstrukturen/projekten ich pusha till vår Github.
+
+- Ett projekt för backenden
+- Ett projekt för frontenden
+- Ett projekt för testerna
+- Folderstrukturen för MVC pattern
+
+Efter ovan började vi med att koda backenden och databasen. Detta testade vi att det fungerade via Postman. Efter Detta så började vi med frontend delen och att få logiken att fungera. (Att skicka data till vår backend). Detta fick vi lägga lite tid på då vi fick lära oss razor pages och den syntaxen.
+
+Vi insåg mot slutet av projektet att vi la för lite tid på planeringen och fick refaktorera en hel del kod (ta bort onödiga klasser/logik) för att få programmet att fungera som vi ville. Det var lärorikt att köra fast och ta några steg tillbaka. 
+
+
 ## Applikationen
 
 Fokus på att få basfunktionalitet i appen så att:
