@@ -110,7 +110,8 @@ När vi körde fast satt vi oftast i grupp och försökte klura ut lösningen ge
 
 ## Verktyg
 
-AzureDevops
+AzureDevops  
+![img](img/DevOps Board.png)
 
 Docker
 
